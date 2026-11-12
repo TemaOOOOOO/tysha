@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Тиша — заснути знову після нічної тривоги</title>
+<meta name="description" content="«Тиша» допомагає заснути знову після нічної тривоги: 3-хвилинна техніка українською одразу після відбою, а зранку план, що зробити ввечері.">
+
+<!--
+  LANDING PAGE MVP «Тиша» (ПР03, Транін А.Ю., ІК-31)
+  Перед публікацією замініть три плейсхолдери:
+    1) G-VL738E06G7      -> ваш Measurement ID з Google Analytics 4
+    2) CLARITY_ID        -> ID проєкту Microsoft Clarity
+    3) https://docs.google.com/forms/d/e/1FAIpQLScSCdxIQka_QAXIa44DKVIdTsfocJXK0vB_PDtmKPQ2lZVTWA/viewform   -> посилання на Google Form для збору email (див. README)
+  Події, що відправляються в GA4:
+    CTA_click        — будь-яке натискання CTA-кнопки (параметри: cta_position, variant)
+    preorder_click   — натискання «Передзамовити рік за 990 грн» (fake door, HYP-002)
+    pricing_view     — блок ціни потрапив у видиму область
+    faq_open         — відкрито питання FAQ (параметр: question)
+    lead_form_open   — відкрито форму email
+  A/B-тест заголовка (HYP-010): варіант A = UVP з ПР02, варіант B = загальний заголовок.
+  Варіант призначається випадково 50/50 і запам'ятовується в localStorage; примусово: ?v=a або ?v=b
+-->
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VL738E06G7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-VL738E06G7');
+</script>
+<!-- Microsoft Clarity -->
+<style>
+  :root{
+    --bg:#0f1424; --bg2:#151b2f; --card:#1b2340; --text:#e9ecf5; --muted:#a8b0c8;
+    --accent:#8fb4ff; --accent2:#c9a7ff; --ok:#7fd6a8; --line:#2a3357;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+  a{color:var(--accent)}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+  header{position:sticky;top:0;background:rgba(15,20,36,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);z-index:5}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .logo{font-weight:700;font-size:20px;letter-spacing:.5px}
+  .logo span{color:var(--accent2)}
+  .btn{display:inline-block;border:0;cursor:pointer;border-radius:12px;padding:14px 22px;font-size:16px;font-weight:600;text-decoration:none;
+       background:linear-gradient(135deg,var(--accent),var(--accent2));color:#0f1424}
+  .btn.small{padding:9px 16px;font-size:14px}
+  .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+  section{padding:64px 0;border-bottom:1px solid var(--line)}
+  h1{font-size:40px;line-height:1.15;margin:0 0 16px}
+  h2{font-size:28px;margin:0 0 20px}
+  .sub{font-size:19px;color:var(--muted);max-width:640px}
+  .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+  .note{font-size:13px;color:var(--muted);margin-top:10px}
+  .phone{background:var(--bg2);border:1px solid var(--line);border-radius:28px;padding:22px;max-width:290px;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+  .phone .time{font-size:44px;font-weight:300;text-align:center}
+  .phone .alert{background:#2a1f2f;border:1px solid #5a3a55;color:#ffc9d6;border-radius:12px;padding:10px 12px;font-size:14px;margin:14px 0}
+  .phone .tech{background:var(--card);border-radius:14px;padding:14px;font-size:14px}
+  .phone .bigbtn{margin-top:14px;text-align:center;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#0f1424;border-radius:999px;padding:16px;font-weight:700}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+  .card h3{margin:0 0 8px;font-size:18px}
+  .card p{margin:0;color:var(--muted)}
+  .pains li{margin:10px 0;font-size:18px}
+  .quote{font-style:italic;color:var(--muted)}
+  .steps{counter-reset:s;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .step{background:var(--card);border-radius:16px;padding:18px;border:1px solid var(--line)}
+  .step:before{counter-increment:s;content:counter(s);display:flex;width:34px;height:34px;border-radius:50%;align-items:center;justify-content:center;
+       background:var(--accent);color:#0f1424;font-weight:700;margin-bottom:10px}
+  .counter{font-size:34px;font-weight:700;color:var(--ok)}
+  .pricing{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .price{font-size:30px;font-weight:700}
+  .price small{font-size:15px;color:var(--muted);font-weight:400}
+  ul.check{padding-left:0;list-style:none}
+  ul.check li{padding-left:26px;position:relative;margin:7px 0}
+  ul.check li:before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:700}
+  details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:10px 0}
+  summary{cursor:pointer;font-weight:600}
+  details p{color:var(--muted);margin:10px 0 0}
+  form .row{display:flex;gap:10px;flex-wrap:wrap}
+  input{flex:1;min-width:200px;padding:14px;border-radius:12px;border:1px solid var(--line);background:var(--bg2);color:var(--text);font-size:16px}
+  footer{padding:30px 0;color:var(--muted);font-size:13px}
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:10}
+  .modal.open{display:flex}
+  .modal .box{background:var(--bg2);border:1px solid var(--line);border-radius:18px;padding:26px;max-width:460px}
+  @media (max-width:820px){
+    h1{font-size:30px}.hero,.pricing{grid-template-columns:1fr}.grid3{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo">Ти<span>ша</span></div>
+    <a class="btn small" href="#signup" data-cta="header">Отримати ранній доступ</a>
+  </div>
+</header>
+
+<!-- БЛОК 1. HERO (заголовок = UVP з ПР02, табл. 7.5) -->
+<section id="hero">
+  <div class="wrap hero">
+    <div>
+      <h1 id="headline">Заснути знову за 15 хвилин після нічної тривоги</h1>
+      <p class="sub" id="subheadline">3-хвилинна техніка українською вмикається одразу після відбою, а зранку «Тиша» підкаже, що зробити ввечері. Для тих, кого будять сирени, і для батьків, які прокидаються разом із дітьми.</p>
+      <p style="margin-top:26px">
+        <a class="btn" href="#signup" data-cta="hero">Отримати ранній доступ безкоштовно</a>
+      </p>
+      <p class="note">Базова нічна допомога безкоштовна назавжди. Працює без інтернету.</p>
+    </div>
+    <!-- БЛОК 3 (частково). Solution teaser: mockup екрана -->
+    <div class="phone" aria-label="Макет екрана застосунку">
+      <div class="time">02:31</div>
+      <div class="alert">Відбій тривоги в Київській області · 02:29</div>
+      <div class="tech"><b>Техніка «Важкі повіки»</b><br>2 хв 40 с · українською · офлайн<br><span style="color:var(--muted)">Екран згасне сам. Telegram відкривати не треба.</span></div>
+      <div class="bigbtn">Не сплю</div>
+    </div>
+  </div>
+</section>
+
+<!-- БЛОК 2. PROBLEM STATEMENT -->
+<section id="problem">
+  <div class="wrap">
+    <h2>Вам це знайомо?</h2>
+    <ul class="pains">
+      <li>Сирена о другій ночі, коридор, відбій — а заснути вже не виходить до п'ятої.</li>
+      <li>Рука сама тягнеться до Telegram «перевірити, що сталося», і ніч остаточно втрачена.</li>
+      <li>Годинник показує «5 годин сну, 3 пробудження», але не каже, що з цим робити.</li>
+      <li>Діти після тривоги вже сплять, а ви — ні. І вставати о 6:45.</li>
+    </ul>
+    <p class="quote">«Мені б просто якусь кнопку: прокинулась о третій, допоможи заснути» — з інтерв'ю з користувачкою</p>
+  </div>
+</section>
+
+<!-- БЛОК 3. SOLUTION TEASER: 3 вигоди, а не функції -->
+<section id="solution">
+  <div class="wrap">
+    <h2>Що змінить «Тиша»</h2>
+    <div class="grid3">
+      <div class="card"><h3>Засинаєте швидше після тривоги</h3><p>Короткі техніки на 2–3 хвилини на основі когнітивно-поведінкової терапії безсоння. Без 20-хвилинних медитацій і звуків лісу.</p></div>
+      <div class="card"><h3>Розумієте, що зіпсувало ніч</h3><p>Зранку — скільки сну забрала тривога і 1–3 прості дії на вечір. План, а не графіки.</p></div>
+      <div class="card"><h3>Допомога є навіть без світла</h3><p>Нічні аудіо вже на телефоні. Без реклами посеред ночі. Є казки й дихальні ігри для дітей.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- БЛОК 4. SOCIAL PROOF (лише реальні цифри — оновлювати вручну) -->
+<section id="proof">
+  <div class="wrap">
+    <h2>Ми не вигадали цю проблему</h2>
+    <div class="grid3">
+      <div class="card"><div class="counter">71%</div><p>учасників нашого опитування назвали тривоги й вибухи головною причиною поганого сну</p></div>
+      <div class="card"><div class="counter">4,33 з 5</div><p>— наскільки людям важливо вирішити проблему сну; поточними рішеннями задоволені лише на 2,46</p></div>
+      <div class="card"><div class="counter" id="waitlist-count">—</div><p>людей уже в списку раннього доступу <span id="waitlist-note">(оновлюється вручну)</span></p></div>
+    </div>
+    <p class="note">Дані: опитування 26 респондентів і 5 глибинних інтерв'ю, жовтень 2026. Методику технік ми готуємо разом із лікарем-сомнологом.</p>
+  </div>
+</section>
+
+<!-- БЛОК 5. HOW IT WORKS -->
+<section id="how">
+  <div class="wrap">
+    <h2>Як це працює</h2>
+    <div class="steps">
+      <div class="step">Відповідаєте на 3 питання — 1 хвилина.</div>
+      <div class="step">Обираєте область: «Тиша» знає, коли в ній тривога.</div>
+      <div class="step">Після відбою — коротка техніка або одна кнопка «Не сплю».</div>
+      <div class="step">Зранку — що зробити ввечері, щоб наступна ніч була кращою.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Ціна + FAKE DOOR (HYP-002) -->
+<section id="pricing">
+  <div class="wrap">
+    <h2>Скільки коштує</h2>
+    <div class="pricing">
+      <div class="card">
+        <h3>Безкоштовно</h3>
+        <div class="price">0 грн <small>назавжди</small></div>
+        <ul class="check">
+          <li>Кнопка «Не сплю» і віджет</li>
+          <li>5 нічних технік офлайн</li>
+          <li>Звуки й казки для дітей без реклами</li>
+        </ul>
+        <a class="btn ghost" href="#signup" data-cta="pricing_free">Хочу безкоштовну версію</a>
+      </div>
+      <div class="card">
+        <h3>Premium</h3>
+        <div class="price">149 грн <small>/ міс або 990 грн / рік</small></div>
+        <ul class="check">
+          <li>Ранковий звіт із накладкою тривог на сон</li>
+          <li>Персональний план на 7 днів</li>
+          <li>Вся аудіобібліотека і PDF-звіт для лікаря</li>
+          <li>Перші 7 ночей безкоштовно, нагадаємо за 2 дні до оплати</li>
+        </ul>
+        <button class="btn" id="preorder" data-cta="preorder">Передзамовити рік за 990 грн</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- БЛОК 6. CTA SECTION -->
+<section id="signup">
+  <div class="wrap">
+    <h2>Отримайте ранній доступ</h2>
+    <p class="sub">Залиште email — ми запросимо вас у закритий пілот і першими надішлемо нічні техніки. Жодних оплат і спаму, відписатися можна в один клік.</p>
+    <p style="margin-top:20px">
+      <a class="btn" id="lead-btn" href="https://docs.google.com/forms/d/e/1FAIpQLScSCdxIQka_QAXIa44DKVIdTsfocJXK0vB_PDtmKPQ2lZVTWA/viewform" target="_blank" rel="noopener" data-cta="signup">Залишити email</a>
+    </p>
+    <p class="note">Що буде далі: протягом доби — лист-підтвердження; протягом 2 тижнів — запрошення в закритий пілот (30–40 людей).</p>
+  </div>
+</section>
+
+<!-- БЛОК 7. FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <h2>Питання</h2>
+    <details data-q="no_internet"><summary>Чи працює без інтернету і світла?</summary><p>Так. Нічні техніки завантажуються на телефон заздалегідь. Інтернет потрібен лише, щоб дізнатися про тривогу автоматично; кнопка «Не сплю» працює завжди.</p></details>
+    <details data-q="charge"><summary>Чи спишуть гроші після 7 безкоштовних ночей?</summary><p>Ні без попередження: за 2 дні до кінця пробного періоду ми нагадаємо, а скасувати можна в один дотик. Безкоштовна версія не потребує картки взагалі.</p></details>
+    <details data-q="evidence"><summary>Це справді допомагає чи це «маркетинг»?</summary><p>Техніки базуються на когнітивно-поведінковій терапії безсоння (КПТ-Б) — методі першої лінії в клінічних рекомендаціях. «Тиша» не лікує безсоння і не замінює лікаря; якщо проблема триває місяцями, ми порадимо звернутися до фахівця.</p></details>
+    <details data-q="data"><summary>Що з моїми даними про сон?</summary><p>Дані зберігаються на пристрої. У хмару — лише за вашою згодою. Ми не продаємо дані третім особам.</p></details>
+    <details data-q="watch"><summary>Чи потрібен смарт-годинник?</summary><p>Ні. Нічна допомога працює на будь-якому смартфоні. Годинник (Apple Watch, Galaxy Watch) лише робить ранковий звіт точнішим.</p></details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026 «Тиша» — навчальний MVP (ПР03, Lean Startup). Продукт у розробці; сторінка перевіряє інтерес до ідеї.</div>
+</footer>
+
+<!-- Fake door modal -->
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+  <div class="box">
+    <h3 style="margin-top:0">Дякуємо! Ви серед перших</h3>
+    <p>Оплата ще не відкрита — «Тиша» зараз у розробці, і ми нічого не списуємо. Залиште email, і ми закріпимо за вами ціну 990 грн/рік та повідомимо про запуск першими.</p>
+    <p><a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLScSCdxIQka_QAXIa44DKVIdTsfocJXK0vB_PDtmKPQ2lZVTWA/viewform" target="_blank" rel="noopener" data-cta="preorder_email">Залишити email</a>
+       <button class="btn ghost" id="close">Закрити</button></p>
+  </div>
+</div>
+
+<script>
+  // --- A/B варіант заголовка (HYP-010) ---
+  var variant = 'a';
+  try {
+    var q = new URLSearchParams(location.search).get('v');
+    if (q === 'a' || q === 'b') { variant = q; localStorage.setItem('tysha_v', q); }
+    else { variant = localStorage.getItem('tysha_v') || (Math.random() < 0.5 ? 'a' : 'b'); localStorage.setItem('tysha_v', variant); }
+  } catch (e) { variant = Math.random() < 0.5 ? 'a' : 'b'; }
+  if (variant === 'b') {
+    document.getElementById('headline').textContent = 'Застосунок для кращого сну українською';
+    document.getElementById('subheadline').textContent = 'Техніки для засинання, звуки і звіти про сон. Безкоштовна базова версія.';
+  }
+  function track(name, params) {
+    params = params || {}; params.variant = variant;
+    try { gtag('event', name, params); } catch (e) {}
+    try { clarity('event', name); } catch (e) {}
+  }
+  track('variant_assigned', {});
+
+  // --- CTA_click для всіх CTA ---
+  document.querySelectorAll('[data-cta]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      track('CTA_click', { cta_position: el.getAttribute('data-cta') });
+      if (el.getAttribute('data-cta') === 'signup' || el.getAttribute('data-cta') === 'preorder_email') track('lead_form_open', {});
+    });
+  });
+
+  // --- Fake door: передзамовлення (HYP-002) ---
+  var modal = document.getElementById('modal');
+  document.getElementById('preorder').addEventListener('click', function () {
+    track('preorder_click', { price: 990 });
+    modal.classList.add('open');
+  });
+  document.getElementById('close').addEventListener('click', function () { modal.classList.remove('open'); });
+
+  // --- pricing_view ---
+  if ('IntersectionObserver' in window) {
+    var seen = false;
+    new IntersectionObserver(function (ents) {
+      ents.forEach(function (en) { if (en.isIntersecting && !seen) { seen = true; track('pricing_view', {}); } });
+    }, { threshold: 0.5 }).observe(document.getElementById('pricing'));
+  }
+
+  // --- faq_open (HYP-016) ---
+  document.querySelectorAll('details[data-q]').forEach(function (d) {
+    d.addEventListener('toggle', function () { if (d.open) track('faq_open', { question: d.getAttribute('data-q') }); });
+  });
+</script>
+</body>
+</html>
